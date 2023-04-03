@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300&display=swap');
+
 :root {
     font-size: 20px;
 }
@@ -6,6 +8,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Alexandria', sans-serif;
 }
 
 a {
@@ -14,7 +17,7 @@ a {
 }
 
 a:hover {
-    color: tomato;
+    color: #610f87;
 }
 
 .navbar {
@@ -29,7 +32,7 @@ a:hover {
 
 .nav a {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 10px;
 }
 
 .container {
@@ -47,7 +50,7 @@ a:hover {
 .featured {
     display: inline-block;
     padding: 10px 20px;
-    background-color: tomato;
+    background-color: #cf3652;
     color: #fff;
 }
 
@@ -68,7 +71,7 @@ a:hover {
 
 .btn {
     display: inline-block;
-    background: tomato;
+    background: #cf3652;
     color: #fff;
     font-size: 1.3rem;
     border: none;
@@ -77,7 +80,7 @@ a:hover {
 }
 
 /* note list page styles */
-.note-wrapper {
+.booking-wrapper {
     max-width: 60%;
     display: flex;
     justify-content: space-between;
@@ -86,14 +89,14 @@ a:hover {
     border-bottom: 1px solid #ccc;
 }
 
-.note {
+.booking {
     font-size: 1.3rem;
 }
 
 .delete {
     display: inline-block;
     padding: 5px 10px;
-    background-color: tomato;
+    background-color: #cf3652;
     color: #fff;
 }
 
@@ -107,8 +110,15 @@ a:hover {
 
 .success {
     display: inline-block;
-    padding: 10px;
-    border: 1px solid blue;
+    padding: 7px;
+    border: 1px solid #610f87;
     font-size: 1.2rem;
-    color: blue;
+    color: #610f87;
+}
+
+.update {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #cf3652;
+    color: #fff;
 }

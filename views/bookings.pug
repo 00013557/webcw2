@@ -1,0 +1,16 @@
+extends layout.pug
+
+block content
+    div.container 
+        h1 All Bookings 
+
+        if deleted
+            p.success Deleted successfully!
+        if updated 
+            p.updated Information is updated
+
+        each booking in bookings 
+            div.booking-wrapper 
+                a.booking(href=`/booking/${ booking.id }`) #{ booking.full_name }
+                a.update(href=`/${booking.id}/update`) Update
+                a.delete(href=`/${booking.id}/delete`) Delete

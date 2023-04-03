@@ -2,5 +2,8 @@ extends layout.pug
 
 block content 
     div.container 
-        h1.title #{ note.title } 
-        p.description #{ note.description }
+        h2.full_name Full Name: #{ booking.full_name } 
+        p.phone_number Phone Number: #{ booking.phone_number } 
+        p.table_number Table Number: #{ booking.table_number } 
+        p.datetime Date and Time: #{ booking.datetime } 
+        p.information Additional Information: #{ booking.information } 

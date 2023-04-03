@@ -1,4 +1,5 @@
 const express = require('express')
+
 const app = express()
 
 const fs = require('fs')
@@ -6,6 +7,7 @@ const fs = require('fs')
 app.set('view engine', 'pug')
 
 app.use('/static', express.static('public'))
+
 app.use(express.urlencoded({ extended: false}))
 
 // localhost:10000
@@ -18,24 +20,30 @@ app.get('/create', (req, res) => {
 })
 
 app.post('/create', (req, res) => {
-    const title = req.body.title
-    const description = req.body.description
+    const full_name = req.body.full_name
+    const phone_number = req.body.phone_number
+    const table_number = req.body.table_number
+    const datetime = req.body.datetime
+    const information = req.body.information
 
-    if (title.trim() == '' && description.trim() == '') {
+    if (full_name.trim() == '' && phone_number.trim() == '' && table_number.trim() == '' && datetime.trim() == '' && information.trim() == '' ) {
         res.render('create', { error: true })
     } else {
-        fs.readFile('./data/notes.json', (err, data) => {
+        fs.readFile('./data/bookings.json', (err, data) => {
             if (err) throw err
 
-            const notes = JSON.parse(data)
+            const bookings = JSON.parse(data)
 
-            notes.push({
+            bookings.push({
                 id: id (),
-                title: title, 
-                description: description,
+                full_name: full_name, 
+                phone_number: phone_number,
+                table_number: table_number,
+                datetime: datetime,
+                information: information,
             })
 
-            fs.writeFile('./data/notes.json', JSON.stringify(notes), err => {
+            fs.writeFile('./data/bookings.json', JSON.stringify(bookings), err => {
                 if (err) throw err
 
                 res.render('create', { success: true })
@@ -45,30 +53,86 @@ app.post('/create', (req, res) => {
 
 })
 
-
-app.get('/notes', (req, res) => {
-    fs.readFile('./data/notes.json', (err, data) => {
+app.get('/bookings', (req, res) => {
+    fs.readFile('./data/bookings.json', (err, data) => {
         if (err) throw err
 
-        const notes = JSON.parse(data)
+        const bookings = JSON.parse(data)
 
-        res.render('notes', { notes: notes})
+        res.render('bookings', { bookings: bookings })
     })
 })
 
-app.get('/notes/:id', (req, res) => {
+app.get('/booking/:id', (req, res) => {
     const id = req.params.id
 
-    fs.readFile('./data/notes.json', (err, data) => {
+    fs.readFile('./data/bookings.json', (err, data) => {
         if (err) throw err
 
-        const notes = JSON.parse(data)
+        const bookings = JSON.parse(data)
 
-        const note = notes.filter(note => note.id == id)[0]
+        const booking = bookings.filter(booking => booking.id == id)[0]
 
-        res.render('detail', { note:note })
+        res.render('detail', { booking: booking })
     })
 })
+
+app.get('/:id/delete', (req, res) => {
+    const id = req.params.id
+
+    fs.readFile('./data/bookings.json', (err, data) => {
+        if (err) throw err 
+
+        const bookings = JSON.parse(data)
+
+        const filteredBookings = bookings.filter(booking => booking.id != id)
+
+        fs.writeFile('./data/bookings.json', JSON.stringify(filteredBookings), (err) => {
+            if (err) throw err 
+
+            res.render('bookings', { bookings: filteredBookings, deleted: true})
+        })
+    })
+})
+
+/*app.get('/:id/update', (req,res) => {
+    const id = req.params.id
+    const full_name = req.params.full_name
+    const phone_number = req.params.phone_number
+    const table_number = req.params.table_number
+    const datetime = req.params.datetime
+    const information = req.params.information
+
+    if (full_name.trim() === '' || phone_number.trim() === '' || table_number.trim() === '' || datetime.trim() === '' || information.trim() === '') {
+        fs.readFile('./data/bookings.json', (err, data) => {
+            if (err) throw err
+            const bookings = JSON.parse(data)
+            const booking = bookings.filter(booking => booking.id === id)[0]
+            res.render('detail', {booking: booking, error:true })
+        })
+    } else {
+        fs.readFile('./data/bookings.json', (err, data) => {
+            if (err) throw err
+            const bookings = JSON.parse(data)
+            const booking = bookings.filter(booking => booking.id === id)[0]
+            const bookingId = bookings.IndexOf(booking)
+            const splicedBooking = bookings.splice(BookingId, 1)[0]
+            splicedBooking.full_name = full_name
+            splicedBooking.phone_number = phone_number
+            splicedBooking.table_number = table_number
+            splicedBooking.datetime = datetime
+            splicedBooking.information = information
+
+            bookings.push(splicedBooking)
+            fs.readFile('./data/bookings.json', JSON.stringify(bookings), err => {
+                if (err) throw err
+
+                res.render('bookings', {bookings: bookings, updated: true})
+            })
+
+        })
+    }
+})*/
 
 app.listen(10000, err => {
     if (err) console.log(err)
