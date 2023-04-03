@@ -98,13 +98,6 @@ app.get('/:id/delete', (req, res) => {
 /*app.get('/:id/update', (req,res) => {
     const id = req.params.id
     const full_name = req.params.full_name
-    const phone_number = req.params.phone_number
-    const table_number = req.params.table_number
-    const datetime = req.params.datetime
-    const information = req.params.information
-
-    if (full_name.trim() === '' || phone_number.trim() === '' || table_number.trim() === '' || datetime.trim() === '' || information.trim() === '') {
-        fs.readFile('./data/bookings.json', (err, data) => {
             if (err) throw err
             const bookings = JSON.parse(data)
             const booking = bookings.filter(booking => booking.id === id)[0]
@@ -118,16 +111,11 @@ app.get('/:id/delete', (req, res) => {
             const bookingId = bookings.IndexOf(booking)
             const splicedBooking = bookings.splice(BookingId, 1)[0]
             splicedBooking.full_name = full_name
-            splicedBooking.phone_number = phone_number
-            splicedBooking.table_number = table_number
-            splicedBooking.datetime = datetime
-            splicedBooking.information = information
+
 
             bookings.push(splicedBooking)
             fs.readFile('./data/bookings.json', JSON.stringify(bookings), err => {
                 if (err) throw err
-
-                res.render('bookings', {bookings: bookings, updated: true})
             })
 
         })
