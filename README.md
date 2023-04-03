@@ -27,3 +27,5 @@ node app
 ### Web application repository on github
 [link to github repository, click this text to access the repository] (https://github.com/00013557/webcw2.git)
 
+### Link to the application on Glitch
+https://stone-coconut-grandiflora.glitch.me/
