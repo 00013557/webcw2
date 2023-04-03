@@ -11,7 +11,7 @@ git clone https://github.com/00013557/webcw2.git
 
 2. Install dependencies 
 ```bash
-cd [project folder]
+cd webtechcw
 npm install
 ```
 
@@ -25,4 +25,4 @@ node app
 - pug.js
 
 ### Web application repository on github
-[link to github repository. Click to access] (https://github.com/00013557/webcw2.git)
+[link to github repository, click this text to access the repository] (https://github.com/00013557/webcw2.git)
