@@ -1,4 +1,5 @@
 const express = require('express')
+const req = require('express/lib/request')
 
 const app = express()
 
@@ -51,6 +52,16 @@ app.post('/create', (req, res) => {
         })
     }
 
+})
+
+app.get('/api/v1/bookings', (req, res) => {
+    fs.readFile('./data/bookings.json', (err, data) => {
+        if (err) throw err
+
+        const bookings = JSON.parse(data)
+
+        res.json(bookings)
+    })
 })
 
 app.get('/bookings', (req, res) => {
